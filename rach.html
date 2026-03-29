@@ -187,6 +187,40 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .initial-gif {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .initial-gif img {
+    height: 130px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .gif-container {
+    display: flex;
+    justify-content: center;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.4s ease;
+    opacity: 0;
+    margin-bottom: 0;
+  }
+
+  .gif-container.visible {
+    max-height: 220px;
+    opacity: 1;
+    margin-bottom: 20px;
+  }
+
+  .gif-container img {
+    height: 180px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
 </style>
 </head>
 <body>
@@ -202,9 +236,18 @@
     <p class="eyebrow">Following a full review of the delayed-address incident</p>
     <h1>Rach, you have two&nbsp;options regarding dinner:</h1>
     <p class="subheading">This portal has been established to resolve the matter fairly and efficiently. Please select your position below.</p>
+
+    <div class="initial-gif">
+      <img src="https://media.giphy.com/media/P44I0Tu9kbMuGaaNrO/giphy.gif" alt="Dinner party" />
+    </div>
+
     <div class="divider"></div>
 
     <div id="message" class="message-box"></div>
+
+    <div id="gif" class="gif-container">
+      <img id="gif-img" src="" alt="" />
+    </div>
 
     <div id="buttons" class="buttons">
       <button class="btn-primary" onclick="choose('yes')">I'll come to dinner</button>
@@ -223,14 +266,31 @@
 
   const messageEl = document.getElementById('message');
   const buttonsEl = document.getElementById('buttons');
+  const gifEl = document.getElementById('gif');
+  const gifImg = document.getElementById('gif-img');
+
+  const GIFS = {
+    celebrate: 'https://media.giphy.com/media/K3455mdtQfdvxYFeHy/giphy.gif',
+    complaint: 'https://media.giphy.com/media/3orifhmmZDGdHO1nYA/giphy.gif',
+    nicetry:   'https://media.giphy.com/media/Gb3fUfhUmyZjkiQJSB/giphy.gif',
+    sassy:     'https://media.giphy.com/media/b3aeoNUl5VW9DNQJZh/giphy.gif',
+  };
 
   function showMessage(text, success = false) {
     messageEl.classList.remove('visible', 'success');
     messageEl.textContent = '';
-    void messageEl.offsetWidth; // reflow for re-animation
+    void messageEl.offsetWidth;
     messageEl.textContent = text;
     if (success) messageEl.classList.add('success');
     requestAnimationFrame(() => messageEl.classList.add('visible'));
+  }
+
+  function showGif(key) {
+    gifEl.classList.remove('visible');
+    setTimeout(() => {
+      gifImg.src = GIFS[key];
+      gifEl.classList.add('visible');
+    }, 200);
   }
 
   function setButtons(html) {
@@ -247,6 +307,7 @@
         ? 'Noted. Your attitude has been logged. Your attendance has been confirmed. See you at dinner.'
         : 'Perfect. Your attendance has been confirmed. See you at dinner.';
       showMessage(msg, true);
+      showGif(option === 'attitude' ? 'sassy' : 'celebrate');
       buttonsEl.classList.add('fading');
       setTimeout(() => { buttonsEl.innerHTML = ''; }, 300);
       document.querySelector('.portal-footer').innerHTML =
@@ -258,12 +319,14 @@
 
     if (resistance === 1) {
       showMessage('Your complaint has been received. Yes, Phil was late with the address. No, this does not cancel dinner.');
+      showGif('complaint');
       setButtons(`
         <button class="btn-primary" onclick="choose('yes')">Fine, I'll come</button>
         <button class="btn-secondary" onclick="choose('no')">I stand by my decision</button>
       `);
     } else if (resistance === 2) {
       showMessage('We admire your persistence. Unfortunately, dinner is still happening.');
+      showGif('nicetry');
       setButtons(`
         <button class="btn-primary" onclick="choose('yes')">Okay I'm coming</button>
         <button class="btn-primary" onclick="choose('attitude')" style="background:#534AB7; box-shadow: 0 2px 8px rgba(83,74,183,0.25);">Okay I'm coming but with attitude</button>
