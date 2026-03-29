@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dinner Cancellation Appeal Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #2D2926;
+    --primary: #B85042;
+    --sand: #E7E8D1;
+    --sage: #A7BEAE;
+    --offwhite: #FAF8F5;
+    --text-dark: #2D2926;
+    --text-med: #5C5450;
+    --text-light: #8A8380;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--offwhite);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .portal {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 40px rgba(45, 41, 38, 0.10), 0 1px 4px rgba(45,41,38,0.06);
+    max-width: 560px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .portal-header {
+    background: var(--dark);
+    color: #fff;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .portal-header .badge {
+    background: var(--primary);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .portal-header .system-id {
+    font-size: 11px;
+    color: var(--sage);
+    letter-spacing: .08em;
+    margin-left: auto;
+    font-weight: 300;
+  }
+
+  .portal-body {
+    padding: 40px 40px 44px;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+  }
+
+  .subheading {
+    font-size: 13px;
+    color: var(--text-med);
+    line-height: 1.6;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--sand);
+    margin-bottom: 28px;
+  }
+
+  .message-box {
+    background: #F5F0EC;
+    border-left: 3px solid var(--primary);
+    border-radius: 6px;
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .message-box.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .message-box.success {
+    border-left-color: #639922;
+    background: #EAF3DE;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: opacity 0.3s ease;
+  }
+
+  .buttons.fading {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    text-align: left;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(184, 80, 66, 0.25);
+  }
+
+  .btn-primary:hover {
+    background: #a3443a;
+    box-shadow: 0 4px 16px rgba(184, 80, 66, 0.35);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: #fff;
+    color: var(--text-dark);
+    border: 1px solid #E0DAD5;
+  }
+
+  .btn-secondary:hover {
+    border-color: #c4bab4;
+    background: #FAFAF8;
+    transform: translateY(-1px);
+  }
+
+  .portal-footer {
+    border-top: 1px solid var(--sand);
+    padding: 14px 40px;
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: .06em;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<div class="portal">
+  <div class="portal-header">
+    <span class="badge">Official</span>
+    <span style="font-size:13px; font-weight:500; letter-spacing:.02em;">Dinner Cancellation Appeal Portal</span>
+    <span class="system-id">REF #DCB-2024-RACH</span>
+  </div>
+
+  <div class="portal-body">
+    <p class="eyebrow">Following a full review of the delayed-address incident</p>
+    <h1>Rach, you have two&nbsp;options regarding dinner:</h1>
+    <p class="subheading">This portal has been established to resolve the matter fairly and efficiently. Please select your position below.</p>
+    <div class="divider"></div>
+
+    <div id="message" class="message-box"></div>
+
+    <div id="buttons" class="buttons">
+      <button class="btn-primary" onclick="choose('yes')">I'll come to dinner</button>
+      <button class="btn-secondary" onclick="choose('no')">I'm not coming because you were late with the address</button>
+    </div>
+  </div>
+
+  <div class="portal-footer">
+    <span>Dinner Status: <strong>Happening</strong></span>
+    <span>Attendance: Pending your cooperation</span>
+  </div>
+</div>
+
+<script>
+  let resistance = 0;
+
+  const messageEl = document.getElementById('message');
+  const buttonsEl = document.getElementById('buttons');
+
+  function showMessage(text, success = false) {
+    messageEl.classList.remove('visible', 'success');
+    messageEl.textContent = '';
+    void messageEl.offsetWidth; // reflow for re-animation
+    messageEl.textContent = text;
+    if (success) messageEl.classList.add('success');
+    requestAnimationFrame(() => messageEl.classList.add('visible'));
+  }
+
+  function setButtons(html) {
+    buttonsEl.classList.add('fading');
+    setTimeout(() => {
+      buttonsEl.innerHTML = html;
+      buttonsEl.classList.remove('fading');
+    }, 300);
+  }
+
+  function choose(option) {
+    if (option === 'yes' || option === 'attitude') {
+      const msg = option === 'attitude'
+        ? 'Noted. Your attitude has been logged. Your attendance has been confirmed. See you at dinner.'
+        : 'Perfect. Your attendance has been confirmed. See you at dinner.';
+      showMessage(msg, true);
+      buttonsEl.classList.add('fading');
+      setTimeout(() => { buttonsEl.innerHTML = ''; }, 300);
+      document.querySelector('.portal-footer').innerHTML =
+        '<span>Dinner Status: <strong>Happening</strong></span><span>Attendance: <strong style="color:#639922">Confirmed ✓</strong></span>';
+      return;
+    }
+
+    resistance++;
+
+    if (resistance === 1) {
+      showMessage('Your complaint has been received. Yes, Phil was late with the address. No, this does not cancel dinner.');
+      setButtons(`
+        <button class="btn-primary" onclick="choose('yes')">Fine, I'll come</button>
+        <button class="btn-secondary" onclick="choose('no')">I stand by my decision</button>
+      `);
+    } else if (resistance === 2) {
+      showMessage('We admire your persistence. Unfortunately, dinner is still happening.');
+      setButtons(`
+        <button class="btn-primary" onclick="choose('yes')">Okay I'm coming</button>
+        <button class="btn-primary" onclick="choose('attitude')" style="background:#534AB7; box-shadow: 0 2px 8px rgba(83,74,183,0.25);">Okay I'm coming but with attitude</button>
+      `);
+    }
+  }
+</script>
+
+</body>
+</html>
